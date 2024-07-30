@@ -4,6 +4,7 @@ import LoginPage from './pages/Authentication/LoginPage/index';
 import ErrorPage from './pages/ErrorPage/index';
 import MoviesListingPage from './pages/MoviesListingPage';
 import AddMovie from './pages/AddMoviePage';
+import EmptyViewPage from './pages/MoviesListingPage/components/EmptyView';
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
     {
         path: '/movies_listing',
         element: <MoviesListingPage />,
+    },
+    {
+        path: '/empty_view',
+        element: <EmptyViewPage />,
     },
     {
         path: '/movie',

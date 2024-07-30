@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import footer_img from '../../../assets/images/footer_img.png';
 import './styles.scss';
 
 const LoginPage = () => {
@@ -49,6 +50,7 @@ const LoginPage = () => {
                     <button type="submit" className="signin-button">Sign In</button>
                 </form>
             </div>
+            <img src={footer_img} alt="Footer" className="footer-img" />
         </div>
     )
 }

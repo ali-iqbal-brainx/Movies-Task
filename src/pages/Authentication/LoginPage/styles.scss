@@ -13,6 +13,7 @@ $white-color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     background-color: $background-color;
 
@@ -52,10 +53,16 @@ $white-color: #FFFFFF;
 
         .remember-me {
             width: 300px;
-            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 24px;
+
+            font-family: "Regular";
+            font-size: 14px;
+            font-weight: 400;
+            color: $white-color;
+
 
             input[type="checkbox"] {
                 appearance: none;
@@ -79,7 +86,7 @@ $white-color: #FFFFFF;
                         top: 1px;
                         width: 5px;
                         height: 10px;
-                        border: solid #fff;
+                        border: solid $white-color;
                         border-width: 0 2px 2px 0;
                         transform: rotate(45deg);
                     }
@@ -91,9 +98,23 @@ $white-color: #FFFFFF;
             background-color: $primary-color;
             width: 300px;
             height: 45px;
-            padding: 15px 126px 15px 126px;
             border-radius: 10px;
+            border: none;
 
+            font-family: "Regular";
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            text-align: center;
+            cursor: pointer;
+            color: $white-color;
         }
+    }
+
+    .footer-img {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
     }
 }
