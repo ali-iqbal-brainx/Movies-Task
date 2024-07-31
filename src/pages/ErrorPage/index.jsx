@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import footer_img from '../../assets/images/footer_img.png';
 import './styles.scss';
 
-const EmptyViewPage = () => {
+const ErrorPage = () => {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        navigate('/movies_listing')
+        navigate('/movies_listing');
     };
 
     return (
@@ -21,4 +21,4 @@ const EmptyViewPage = () => {
     )
 }
 
-export default EmptyViewPage;
+export default ErrorPage;

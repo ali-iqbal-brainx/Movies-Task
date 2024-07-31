@@ -1,16 +1,54 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import footer_img from '../../../assets/images/footer_img.png';
 import './styles.scss';
+import { PASSWORD_REGEX } from "../../../constants";
+import { isLoggedIn, login } from "../../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
+    useLayoutEffect(() => {
+        if (isLoggedIn()) {
+            navigate("/movies_listing");
+        }
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle sign-in logic here
-        console.log({ email, password, rememberMe });
+        if (!email || !password) {
+            window.alert("Email and Password required.");
+            return;
+        }
+
+        if (password.length < 8) {
+            window.alert("Password Must be 8 characters long.");
+            return;
+        }
+
+        if (!password.match(PASSWORD_REGEX)) {
+            toast.error(
+                "Password must contain atleast 8 characters and must contain numbers, symbols and alphabets."
+            );
+        }
+
+        login(email, password)
+            .then((data) => {
+                localStorage.setItem("user", JSON.stringify(data?.user));
+                localStorage.setItem('access_token', data?.access_token)
+
+                if (rememberMe) {
+                    // localStorage.setItem('access_token',data?.access_token)
+                }
+                navigate("/movies_listing");
+            })
+            .catch((error) => {
+                console.log(error);
+                window.alert(error?.response?.data?.error || "Something went wrong");
+            });
     };
 
     return (
