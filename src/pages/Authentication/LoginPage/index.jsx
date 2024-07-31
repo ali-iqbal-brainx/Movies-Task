@@ -5,7 +5,7 @@ import { PASSWORD_REGEX } from "../../../constants";
 import { isLoggedIn, login } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({ setUser, setAccessToken }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,7 +38,9 @@ const LoginPage = () => {
         login(email, password)
             .then((data) => {
                 localStorage.setItem("user", JSON.stringify(data?.user));
-                localStorage.setItem('access_token', data?.access_token)
+                localStorage.setItem('access_token', data?.access_token);
+                setAccessToken(data?.access_token);
+                setUser(data?.user);
 
                 if (rememberMe) {
                     // localStorage.setItem('access_token',data?.access_token)
@@ -53,7 +55,7 @@ const LoginPage = () => {
 
     return (
         <div className="signin-container">
-            <div>
+            <div className="signin-sub-container">
                 <div className="signin_heading">Sign In</div>
                 <form className="signin-form" onSubmit={handleSubmit}>
                     <div className="form-group">

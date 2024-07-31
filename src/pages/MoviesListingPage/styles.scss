@@ -14,7 +14,6 @@ $white-color: #FFFFFF;
     position: relative;
 
     header {
-
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -36,6 +35,10 @@ $white-color: #FFFFFF;
                 line-height: 56px;
                 text-align: center;
             }
+
+            &:hover {
+                opacity: 0.8;
+            }
         }
 
         .right-side {
@@ -50,6 +53,10 @@ $white-color: #FFFFFF;
                 font-weight: 700;
                 line-height: 24px;
                 text-align: center;
+            }
+
+            &:hover {
+                opacity: 0.8;
             }
         }
     }
@@ -72,6 +79,12 @@ $white-color: #FFFFFF;
             align-items: flex-start;
             color: $white-color;
             cursor: pointer;
+            transition: transform 0.5s ease;
+
+            &:hover {
+                transform: scaleY(1.01);
+                opacity: 0.9;
+            }
 
             .card-text {
                 padding-left: 8px;
@@ -191,4 +204,75 @@ $white-color: #FFFFFF;
         bottom: 0;
     }
 
+}
+
+@media screen and (max-width: 1000px) {
+    .movie-list-container {
+        padding: 0px 24px;
+
+        header {
+            height: 120px;
+        }
+
+        .grid-container {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 0px;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .movie-list-container {
+        header {
+            .left-side {
+                align-items: flex-end;
+
+                .my-movies-heading {
+                    font-size: 32px;
+                    line-height: 40px;
+                }
+
+                .add-icon {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+
+            .right-side {
+                .logout {
+                    display: none;
+                }
+
+                .logoutIcon {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        .grid-container {
+            .movie-card {
+                padding: 0px 0px 12px 0px;
+
+                .movie-image-container {
+                    height: 280px;
+                    width: 100%;
+
+                    img {
+                        border-radius: 12px 12px 0px 0px;
+                    }
+                }
+            }
+        }
+
+        .pagination {
+            padding: 80px 0px 150px 0px;
+        }
+
+        .footer-img {
+            height: 80px;
+        }
+
+    }
 }

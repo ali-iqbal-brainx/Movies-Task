@@ -4,9 +4,8 @@ import dropIcon from '../../assets/images/drop.png';
 import './styles.scss';
 import { MIN_FILE_SIZE } from "../../constants";
 import { getBase64 } from "../../services/utilities";
-import { useNavigate, useParams, useLocation, redirect } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { addMovie, updateMovie } from "../../services/movieService";
-import { isLoggedIn } from "../../services/authService";
 const { VITE_BASE_URL_BACKEND } = import.meta.env;
 
 const AddMoviePage = () => {
@@ -18,15 +17,13 @@ const AddMoviePage = () => {
     const navigate = useNavigate();
 
     useLayoutEffect(() => {
-        if (!isLoggedIn()) {
-            redirect("/login");
-        } else if (state && state.movie) {
+        if (state && state.movie) {
             const { movie } = state;
             setTitle(movie.title);
             setPublishYear(movie.publishYear);
             setPosterImage(movie.poster.url ? `${VITE_BASE_URL_BACKEND}${movie.poster.url}` : '');
         }
-    }, [state, navigate]);
+    }, [state]);
 
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission

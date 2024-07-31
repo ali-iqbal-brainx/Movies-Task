@@ -8,7 +8,7 @@ const ErrorPage = () => {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        navigate('/movies_listing');
+        navigate(-1);
     };
 
     return (

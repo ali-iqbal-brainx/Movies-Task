@@ -27,8 +27,6 @@ export const logout = async () => {
     return new Promise((resolve, reject) => {
         authorizedPatchCall('/auth/sign_out')
             .then((data) => {
-                localStorage.clear("user");
-                localStorage.clear("access_token");
                 resolve(data);
             })
             .catch((err) => {

@@ -42,6 +42,34 @@ $white-color: #FFFFFF;
         text-align: center;
         cursor: pointer;
         color: $white-color;
+        margin-bottom: 15px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .logout-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        background-color: transparent;
+        width: 202px;
+        height: 56px;
+        border-radius: 10px;
+        border: 1px solid #FFFFFF;
+        font-family: "Bold";
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: center;
+        cursor: pointer;
+        color: $white-color;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 
     .footer-img {
@@ -49,5 +77,28 @@ $white-color: #FFFFFF;
         position: absolute;
         left: 0;
         bottom: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .empty-view-container {
+        padding: 0px 24px;
+
+        .empty-view-heading {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        .add-movie-btn {
+            width: 100%;
+        }
+
+        .logout-btn {
+            width: 100%;
+        }
+
+        .footer-img {
+            height: 80px;
+        }
     }
 }

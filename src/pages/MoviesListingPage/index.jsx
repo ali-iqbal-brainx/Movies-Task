@@ -3,37 +3,33 @@ import addIcon from '../../assets/images/add_icon.svg';
 import logoutIcon from '../../assets/images/logout.svg';
 import footer_img from '../../assets/images/footer_img.png';
 import './styles.scss';
-import { isLoggedIn, logout } from '../../services/authService';
+import { logout } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import { getMovies } from '../../services/movieService';
 import MovieCard from './components/MovieCard';
 
-const MoviesListingPage = () => {
+const MoviesListingPage = ({ setUser, setAccessToken }) => {
     const navigate = useNavigate();
     const [pageNo, setPageNo] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [movies, setMovies] = useState([]);
 
     useLayoutEffect(() => {
-        if (!isLoggedIn()) {
-            navigate("/login");
-        } else {
-            getMovies(`?pageNo=${pageNo}`)
-                .then((data) => {
-                    if (data?.movies?.length === 0 || !data?.movies) {
-                        navigate('/empty_view');
-                    } else {
-                        setMovies(data?.movies);
-                        setPageNo(data?.meta?.current_page);
-                        setTotalPages(data?.meta?.total_pages);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                    window.alert(error?.response?.data?.error || "Something went wrong");
-                });
-        }
-    }, [pageNo, navigate]);
+        getMovies(`?pageNo=${pageNo}`)
+            .then((data) => {
+                if (data?.movies?.length === 0 || !data?.movies) {
+                    navigate('/empty_view');
+                } else {
+                    setMovies(data?.movies);
+                    setPageNo(data?.meta?.current_page);
+                    setTotalPages(data?.meta?.total_pages);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                window.alert(error?.response?.data?.error || "Something went wrong");
+            });
+    }, [pageNo]);
 
     const handlePrevPage = () => {
         if (pageNo > 1) {
@@ -50,6 +46,10 @@ const MoviesListingPage = () => {
     const handleLogout = () => {
         logout()
             .then((data) => {
+                localStorage.clear("user");
+                localStorage.clear("access_token");
+                setAccessToken(null);
+                setUser(null);
                 navigate("/login");
             })
             .catch((error) => {
@@ -74,7 +74,7 @@ const MoviesListingPage = () => {
                 <div className='right-side' onClick={handleLogout}>
                     <div className='logout'>Logout</div>
                     <div>
-                        <img src={logoutIcon} alt='logout-icon' className='logout-icon' />
+                        <img src={logoutIcon} alt='logout-icon' className='logoutIcon' />
                     </div>
                 </div>
             </header>
